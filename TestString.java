@@ -1,5 +1,5 @@
 //Feb.7th.2017
-//operat String
+//operat String 
 import java.util.*;
 public class TestString{
 	public static void main(String[] args){
@@ -88,7 +88,8 @@ public class TestString{
 		for(char ch:c)
 		System.out.println(ch);
 		//toBuffer 
-
+		//toInteger
+	
 
 
 

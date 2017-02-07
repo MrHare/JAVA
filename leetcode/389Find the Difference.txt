@@ -1,0 +1,16 @@
+public class Solution {
+    public char findTheDifference(String s, String t) {
+        LinkedList<Character> ls=new LinkedList<Character>();
+        for(char c:s.toCharArray()){
+            ls.add(c);
+        }
+        for(char cc:t.toCharArray()){
+            if(ls.contains(cc)){
+                ls.remove(ls.indexOf(cc));
+            }else{
+                return cc;
+            }
+        }
+        return 'a';//hava to be a default return?
+    }
+}

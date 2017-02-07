@@ -1,0 +1,40 @@
+METHOD ONE(T1 81.30%)
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode result=new ListNode(0);
+        ListNode tmp=result;
+        ListNode tmp1=null;
+        while(head!=null){
+            if(head.next==null){
+                tmp.next=head;
+                return result.next;
+            }else{
+                tmp1=head.next;
+                head.next=tmp1.next;
+                tmp1.next=head;
+                tmp.next=tmp1;
+                tmp=tmp.next;////////////////////////problem is hear changed to==>tmp=head;  code never lies.
+                head=head.next;
+            }
+        }
+        return result.next;
+    }
+}
+More Details 
+
+Input:
+[1,2,3]
+Output:
+[2,3]
+Expected:
+[2,1,3]
+
+£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿

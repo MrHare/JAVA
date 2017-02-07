@@ -1,0 +1,33 @@
+METHOD ONE(T4 21.35%)
+public class Solution {
+    public String decodeString(String s) {
+        String result="";
+        int len=s.length();
+        for(int i=0;i<len;i++){
+            char c=s.charAt(i);
+            if(Character.isDigit(c)){
+                int times=c-48;
+                i++;
+                while(Character.isDigit(s.charAt(i))){
+                    times=times*10+s.charAt(i)-48;
+                    i++;
+                }
+                i++;
+                int start=i;
+                int flag=1;
+                while(flag!=0){
+                    i++;
+                    if(s.charAt(i)=='[')flag++;
+                    if(s.charAt(i)==']')flag--;
+                }
+                String ss=decodeString(s.substring(start,i));
+                for(int j=0;j<times;j++){
+                    result+=ss;
+                }
+            }else{
+                result+=c;
+            }
+        }
+        return result;
+    }
+}

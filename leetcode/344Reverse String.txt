@@ -1,0 +1,23 @@
+METHOD ONE (failed ,overtime)
+public class Solution {
+    public String reverseString(String s) {
+        String result="";
+	 	for(int i=s.length()-1;i>=0;i--){
+	 		result+=s.charAt(i);
+	 	}
+	 	return result;
+    }
+}
+evalute
+limit time excuted£¬
+too slow for the very long String
+the length of the String may beyond the Integer.MAX_VALUE
+-----------------------------------------------------------------
+METHOD TWO(33.83%)
+public class Solution {
+    public String reverseString(String s) {
+        return new StringBuffer(s).reverse().toString();
+    }
+}
+seven methods for reversing string
+https://www.oschina.net/code/snippet_12_9060

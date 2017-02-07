@@ -1,0 +1,21 @@
+METHOD ONE(T2 14.51%)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }else{
+            int tmp1=maxDepth(root.left);
+            int tmp2=maxDepth(root.right);
+            return tmp1>tmp2?tmp1+1:tmp2+1;
+        }
+    }
+}

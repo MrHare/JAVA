@@ -1,0 +1,39 @@
+failed method show that Time Limit Exceeded
+public class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        ArrayList<Integer> aL=new ArrayList<Integer>();
+        for(int n:nums){
+            if(aL.contains(n)){
+                return true;
+            }else{
+                aL.add(n);
+            }
+        }
+        return false;
+    }
+}
+
+---------------------------------------------------
+
+method ONE(68.26%)
+public class Solution {
+    public boolean containsDuplicate(int[] nums) {
+       HashSet<Integer> hS=new HashSet<Integer>();
+       for(int n:nums){
+           if(!hS.add(n))return true;
+       }
+       return false;
+    }
+}
+----------------------------------------------
+Method Two(the method 44.75% Keys to the question ,low!)
+public class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> set = new HashSet<>(nums.length);
+        for (int x: nums) {
+            if (set.contains(x)) return true;
+            set.add(x);
+        }
+        return false;
+    }
+}

@@ -1,0 +1,28 @@
+METHOD ONE(T2 67.85%)
+public class Solution {
+    public int removeElement(int[] nums, int val) {
+        if(nums.length==0)return 0;
+        int len=0;
+        for(int n:nums){
+            if(n!=val)nums[len++]=n;
+        }
+        return len;
+    }
+}
+
+METHOD TWO (68.75%)
+public int removeElement(int[] nums, int val) {
+    int i = 0;
+    int n = nums.length;
+    while (i < n) {
+        if (nums[i] == val) {
+            nums[i] = nums[n - 1];
+            // reduce array size by one
+            n--;
+        } else {
+            i++;
+        }
+    }
+    return n;
+}
+what's the most efficient method???

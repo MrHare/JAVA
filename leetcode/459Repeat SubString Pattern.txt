@@ -1,0 +1,20 @@
+public class Solution {
+    public boolean repeatedSubstringPattern(String str) {
+        int len=str.length();
+        char[] cStr=str.toCharArray();
+        int loopLength=1;
+        for(;loopLength<=len/2;loopLength++){
+            if(len%loopLength==0){
+                if(isRepeat(cStr,loopLength,len/loopLength))return true;
+            }
+        }
+        return false;
+    }
+    public boolean isRepeat(char[] cStr,int loopLength,int loopCount){
+        for(int i=0;i<loopLength;i++)
+            for(int j=1;j<loopCount;j++){
+                if(cStr[i]!=cStr[j*loopLength+i])return false;
+            }
+        return true;
+    }
+}
