@@ -1,0 +1,130 @@
+METHOD ONE(18.57%)
+public class Solution {
+    public int myAtoi(String str) {
+        str=str.trim();
+		int max=Integer.MAX_VALUE;
+        int result=0;
+        int result1=0;
+        int flag=1;
+        int i=0;
+        int tmp=0;
+        switch(str.length()){
+        	case 0:return 0;
+        	case 1:{
+        		tmp=str.charAt(i)-'0';
+        		if(tmp>=0&&tmp<=9){
+        			return tmp;
+        		}else{
+        			return 0;
+        		}
+        	}
+        	default:{
+        		tmp=str.charAt(i);
+        		if(tmp=='-'||tmp=='+'){
+		        	if(tmp=='-'){
+		        		flag=-1;
+		        	}
+		        	i++;
+		        }
+		        for(;i<=str.length()-1;i++){
+		        	if(result>max){
+		        		if(flag==1){
+		        			return Integer.MAX_VALUE;
+		        		}else{
+		        			return Integer.MIN_VALUE;
+		        		}
+		        	}
+		        	tmp=str.charAt(i)-'0';
+		        	if(tmp>=0&&tmp<=9){
+		        		result1=result*10+tmp;
+		        		if(result!=(result1-tmp)/10){
+		        			if(flag==1){
+			        			return Integer.MAX_VALUE;
+			        		}else{
+			        			return Integer.MIN_VALUE;
+			        		}
+		        		}
+		        		result=result1;
+		        	}else{
+		        		break;
+		        	}
+		        }
+		        if(result<0){
+		        	if(flag==1){
+			        			return Integer.MAX_VALUE;
+			        		}else{
+			        			return Integer.MIN_VALUE;
+			        		}
+		        }
+		        return result*flag;
+        	}
+        }
+    }
+}
+METHOD TWO(10.77%)
+public class Solution {
+    public int myAtoi(String str) {
+        str=str.trim();
+        if(str.length()==0)return 0;
+		int from=0,to=0;
+		int flag=1;
+		int tmp=str.charAt(from);
+		if(tmp=='+'||tmp=='-'){
+			if(tmp=='-'){
+				flag=-1;
+			}
+			from++;
+		}
+		while(from<str.length()&&str.charAt(from)=='0')from++;
+		for(to=from;to<str.length();){
+			tmp=str.charAt(to)-'0';
+			if(tmp>9||tmp<0)break;
+			to++;
+		}
+		str=str.substring(from,to);
+		System.out.println(str);
+		if(str.length()==0)return 0;
+		if(str.length()<10){
+			return Integer.parseInt(str,10)*flag;
+		}
+		if(str.length()==10){
+			if(flag==1){
+				if(str.compareTo(""+Integer.MAX_VALUE)<=0)return Integer.parseInt(str,10);
+			}
+			if(flag==-1){
+				str="-"+str;
+				if(str.compareTo(""+Integer.MIN_VALUE)<=0)return Integer.parseInt(str,10);
+			}
+		}
+		if(flag==1)return Integer.MAX_VALUE;
+		return Integer.MIN_VALUE;
+    }
+}
+----------------------------------------------------------------------
+METHOD THREE(28.27%)
+public class Solution {
+    public int myAtoi(String str) {
+       str=str.trim();
+       if(str.length()==0)return  0;
+		int flag=1;
+		int i=0;
+		int result=0;
+		int max=Integer.MAX_VALUE/10;
+		if(str.charAt(i)=='-'||str.charAt(i)=='+'){
+			if(str.charAt(i)=='-'){
+				flag=-1;
+			}
+			i++;
+		}
+		for(;i<str.length()&&str.charAt(i)<='9'&&str.charAt(i)>='0';i++){
+/////////////////////////////////////////////////////////////////////////////对溢出的处理很nice，判断7,把8（Integer.MIN_VALUE）包含到溢出中去处理,不影响结果
+			if(result>max||result==max&&str.charAt(i)>'7'){
+				if(flag==1)return Integer.MAX_VALUE;
+				return Integer.MIN_VALUE;
+/////////////////////////////////////////////////////////////////////////////////
+			}
+			result=result*10-'0'+str.charAt(i);
+		}
+		return result*flag;
+    }
+}
