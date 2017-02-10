@@ -1,30 +1,33 @@
 import java.util.*;
 public class LeetCode{
-	public int myAtoi(String str) {
-		str=str.trim();
-		if(str.length()==0)return  0;
-		int flag=1;
+	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+		int length=nums1.length+nums2.length;
+		int mid=length/2;
+		int[] result=new int[mid+2];
+		int len1=0,len2=0;
 		int i=0;
-		int result=0;
-		int max=Integer.MAX_VALUE/10;
-		if(str.charAt(i)=='-'||str.charAt(i)=='+'){
-			if(str.charAt(i)=='-'){
-				flag=-1;
+		while(i<mid+1){
+			int tmp1=len1<nums1.length?nums1[len1]:Integer.MAX_VALUE;
+			int tmp2=len2<nums2.length?nums2[len2]:Integer.MAX_VALUE;
+			if(tmp1<=tmp2){
+				result[i++]=tmp1;
+				len1++;
+			}else{
+				result[i++]=tmp2;
+				len2++;
 			}
-			i++;
+			
 		}
-		for(;i<str.length()&&str.charAt(i)<='9'&&str.charAt(i)>='0';i++){
-			if(result>max||result==max&&str.charAt(i)>'7'){
-				if(flag==1)return Integer.MAX_VALUE;
-				return Integer.MIN_VALUE;
-			}
-			result=result*10-'0'+str.charAt(i);
+		if(length%2==1){
+			return result[mid];
 		}
-		return result*flag;
+		return 0.5*(result[mid]+result[mid-1]);
 
     }
 	public static void main(String[] args){
 		LeetCode leetCode=new LeetCode();
-		System.out.println(leetCode.myAtoi("+1"));
+		int[] nums1={1};
+		int[] nums2=new int[]{3,4,5};
+		System.out.println(leetCode.findMedianSortedArrays(nums1,nums2));
 	}
 }

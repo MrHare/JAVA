@@ -1,0 +1,55 @@
+METHOD ONE(71.18%)-----------------------------------------------------
+public class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int length=nums1.length+nums2.length;
+		int mid=length/2;
+		int mid1=0,mid2=0;
+		int len1=0,len2=0;
+		int i=0;
+		while(i<mid+1){
+			int tmp1=len1<nums1.length?nums1[len1]:Integer.MAX_VALUE;
+			int tmp2=len2<nums2.length?nums2[len2]:Integer.MAX_VALUE;
+			if(tmp1<=tmp2){
+				mid2=mid1;
+				mid1=tmp1;
+				len1++;
+			}else{
+				mid2=mid1;
+				mid1=tmp2;
+				len2++;
+			}
+			i++;			
+		}
+		if(length%2==1){
+			return mid1;
+		}
+		return 0.5*(mid1+mid2);
+    }
+}
+--------------------------------------------------------------------------------
+METHOD TWO(77.40%) USE SPACE
+public class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        	int length=nums1.length+nums2.length;
+		int mid=length/2;
+		int[] result=new int[mid+2];
+		int len1=0,len2=0;
+		int i=0;
+		while(i<mid+1){
+			int tmp1=len1<nums1.length?nums1[len1]:Integer.MAX_VALUE;
+			int tmp2=len2<nums2.length?nums2[len2]:Integer.MAX_VALUE;
+			if(tmp1<=tmp2){
+				result[i++]=tmp1;
+				len1++;
+			}else{
+				result[i++]=tmp2;
+				len2++;
+			}
+			
+		}
+		if(length%2==1){
+			return result[mid];
+		}
+		return 0.5*(result[mid]+result[mid-1]);
+    }
+}
