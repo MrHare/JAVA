@@ -1,0 +1,58 @@
+METHOD ONE(43.27%,60ms)
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int length=0;
+		int start=0;
+		HashMap<Character,Integer> hashMap=new HashMap<Character,Integer>();
+		char[] cs=s.toCharArray();
+		for(int i=0;i<s.length();i++){
+			if(hashMap.containsKey(cs[i])){
+				if(start<=hashMap.get(cs[i])){
+					start=hashMap.get(cs[i])+1;
+				}
+			}
+			hashMap.put(cs[i],i);
+			length=Math.max(length,i-start+1);
+		}    
+		return length;  
+    }
+}
+----------------------------------------------------------------
+METHOD TWO(68.96%,54ms)
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int length=0;
+		int start=0;
+		HashMap<Character,Integer> hashMap=new HashMap<Character,Integer>();
+		char[] cs=s.toCharArray();
+		for(int i=0;i<s.length();i++){
+			if(hashMap.containsKey(cs[i])){
+			    start=Math.max(start,hashMap.get(cs[i])+1);///////////////////////////////////Math.max is fast than if else
+			}
+			hashMap.put(cs[i],i);
+			length=Math.max(length,i-start+1);
+		}    
+		return length;  
+    }
+}
+----------------------------------------------------------------------------------------
+METHOD THREE£¨92.81%£¬43ms£©
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+       int length=0;
+		int start=0;
+		int[] array=new int[128];////////////////////////////////////////array is more fast than hashtable even it needs initialization
+		for(int i=0;i<128;i++){
+			array[i]=-1;
+		}
+		char[] cs=s.toCharArray();
+		for(int i=0;i<s.length();i++){
+			if(array[cs[i]]!=-1){
+				start=Math.max(start,array[cs[i]]+1);
+			}
+			array[cs[i]]=i;
+			length=Math.max(length,i-start+1);
+		}    
+		return length;  
+    }
+}

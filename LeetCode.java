@@ -1,33 +1,22 @@
 import java.util.*;
 public class LeetCode{
-	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-		int length=nums1.length+nums2.length;
-		int mid=length/2;
-		int[] result=new int[mid+2];
-		int len1=0,len2=0;
-		int i=0;
-		while(i<mid+1){
-			int tmp1=len1<nums1.length?nums1[len1]:Integer.MAX_VALUE;
-			int tmp2=len2<nums2.length?nums2[len2]:Integer.MAX_VALUE;
-			if(tmp1<=tmp2){
-				result[i++]=tmp1;
-				len1++;
-			}else{
-				result[i++]=tmp2;
-				len2++;
+	public int lengthOfLongestSubstring(String s) {
+		int length=0;
+		int start=1;
+		int[] array=new int[128];
+		s="a"+s;
+		char[] cs=s.toCharArray();
+		for(int i=1;i<s.length();i++){
+			if(array[cs[i]]!=0){
+				start=Math.max(start,array[cs[i]]+1);
 			}
-			
-		}
-		if(length%2==1){
-			return result[mid];
-		}
-		return 0.5*(result[mid]+result[mid-1]);
-
+			array[cs[i]]=i;
+			length=Math.max(length,i-start+1);
+		}    
+		return length;  
     }
 	public static void main(String[] args){
-		LeetCode leetCode=new LeetCode();
-		int[] nums1={1};
-		int[] nums2=new int[]{3,4,5};
-		System.out.println(leetCode.findMedianSortedArrays(nums1,nums2));
+		LeetCode leetCode=new LeetCode();		
+		System.out.println(leetCode.lengthOfLongestSubstring("abcabcbb"));
 	}
 }
