@@ -1,28 +1,49 @@
 import java.util.*;
+class ListNode{
+	int val;
+	ListNode next;
+	ListNode(int x){val=x;}
+}
 public class LeetCode{
-	public String countAndSay(int n) {
-        if(n==1)return "1";
-        if(n==2)return "11";
-        String str=countAndSay(n-1);
-        StringBuilder result=new StringBuilder();
-        int count=1;
-        int i=1;
-        for(;i<str.length();i++){   	
-        	if(i<str.length()&&str.charAt(i)==str.charAt(i-1)){
-        		count++;
-        	}else{    		
-        		//result=result+count+str.charAt(i-1);
-        		result.append(count).append(str.charAt(i-1));
-        		count=1;
-        	}
-        }
-        //result=result+count+str.charAt(i-1);
-        result.append(count).append(str.charAt(i-1));
-        return result.toString();
+	public ListNode reverseKGroup(ListNode head, int k) {
+		ListNode h=new ListNode(0);
+		boolean isEnd=false;
+		h.next=head;
+		ListNode p,q,tmp1,tmp2;/////////p the node 1,q the node k
+		p=h;
+		while(p.next!=null){
+			tmp1=p.next;
+			if(tmp1.next!=null){
+				tmp2=tmp1.next;
+			}else{
+				break;
+			}
+			tmp1.next=tmp2.next;
+			tmp2.next=tmp1;
+			p.next=tmp2;
+			p=tmp1;
+		}
+		return h.next;
     }
 	public static void main(String[] args){
+		ListNode n1=new ListNode(1);
+		ListNode n2=new ListNode(2);
+		ListNode n3=new ListNode(3);
+		ListNode n4=new ListNode(4);
+		ListNode n5=new ListNode(5);
+		ListNode n6=new ListNode(6);
+		ListNode h;
+		n1.next=n2;
+		n2.next=n3;
+		n3.next=n4;	
+		n4.next=n5;
+		n5.next=n6;
 		LeetCode leetCode=new LeetCode();
-		for(int i=1;i<10;i++)		
-		System.out.println(leetCode.countAndSay(i));
+		h=leetCode.reverseKGroup(n1,2);
+		while(h!=null){
+			System.out.println(h.val);
+			h=h.next;
+		}
+
 	}
 }

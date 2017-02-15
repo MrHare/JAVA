@@ -1,0 +1,54 @@
+METHOD ONE(50.24% 8ms)
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode h=new ListNode(0);
+		boolean isEnd=false;
+		h.next=head;
+		ListNode p,q,pp,tmp;/////////p the node 1,q the node k
+		p=h;
+		q=p;
+		while(!isEnd){
+			//get the node1 to nodek
+			int i=0;
+			for(;i<k&&q.next!=null;i++){
+				q=q.next;
+			}
+			if(q.next==null){
+				isEnd=true;
+			}
+			/** see the middle result
+			     if(i==k){
+				tmp=p;
+				while(tmp!=q){
+					tmp=tmp.next;
+					System.out.println(tmp.val);
+					
+				}
+				System.out.println("---------------");
+			*/	
+			if(i==k){
+				tmp=p.next;
+				p.next=q;
+				p=tmp;
+				pp=p;
+				while(p!=q){
+					tmp=p.next;
+					p.next=q.next;
+					q.next=p;
+					p=tmp;
+				}
+				p=q=pp;
+			}
+		}
+		return h.next;
+    }
+}
+------------------------------------------------

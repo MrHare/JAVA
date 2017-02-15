@@ -1,0 +1,70 @@
+METHOD ONE(8.77% 6ms)
+//similar to leetcode25,just k=2
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode h=new ListNode(0);
+		boolean isEnd=false;
+		h.next=head;
+		ListNode p,q,tmp;/////////p the node 1,q the node k
+		p=h;
+		q=p;
+		while(!isEnd){
+			//get the node1 to nodek
+			int i=0;
+			for(;i<2&&q.next!=null;i++){
+				q=q.next;
+			}
+			if(q.next==null){
+				isEnd=true;
+			}
+			if(i==2){
+				tmp=p.next;
+				p.next=q;
+				p=tmp;
+				tmp.next=q.next;
+				q.next=p;
+				q=p;
+			}
+		}
+		return h.next;
+    }
+}
+----------------------------
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode h=new ListNode(0);
+		boolean isEnd=false;
+		h.next=head;
+		ListNode p,q,tmp1,tmp2;
+		p=h;
+		while(p.next!=null){
+			tmp1=p.next;
+			if(tmp1.next!=null){
+				tmp2=tmp1.next;
+			}else{
+				break;
+			}
+			tmp1.next=tmp2.next;
+			tmp2.next=tmp1;
+			p.next=tmp2;
+			p=tmp1;
+		}
+		return h.next;
+    }
+}
