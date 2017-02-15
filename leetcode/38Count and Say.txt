@@ -1,0 +1,43 @@
+METHOD ONE(16.3% 33ms)   too slow£¬save the median result would be faster
+public class Solution {
+    public String countAndSay(int n) {
+        if(n==1)return "1";
+        if(n==2)return "11";
+        String str=countAndSay(n-1);
+        String result="";
+        int count=1;
+        int i=1;
+        for(;i<str.length();i++){   	
+        	if(i<str.length()&&str.charAt(i)==str.charAt(i-1)){
+        		count++;
+        	}else{    		
+        		result=result+count+str.charAt(i-1);
+        		count=1;
+        	}
+        }
+        result=result+count+str.charAt(i-1);
+        return result;
+    }
+}
+------------------------------------------------------------------
+METHOD TWO(74.4% 5ms)	see the difference between String and StringBuilder!!!
+public class Solution {
+    public String countAndSay(int n) {
+        if(n==1)return "1";
+        if(n==2)return "11";
+        String str=countAndSay(n-1);
+        StringBuilder result=new StringBuilder();
+        int count=1;
+        int i=1;
+        for(;i<str.length();i++){   	
+        	if(i<str.length()&&str.charAt(i)==str.charAt(i-1)){
+        		count++;
+        	}else{    		
+        		result.append(count).append(str.charAt(i-1));
+        		count=1;
+        	}
+        }
+        result.append(count).append(str.charAt(i-1));
+        return result.toString();
+    }
+}
