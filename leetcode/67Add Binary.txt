@@ -1,0 +1,26 @@
+METHOD ONE£¨31.31% 5ms£©
+public class Solution {
+    public String addBinary(String a, String b) {
+        if(a.length()==0||b.length()==0){
+			return a.length()==0?b:a;
+		}
+        StringBuilder str1=new StringBuilder(a);
+        StringBuilder str2=new StringBuilder(b);
+        StringBuilder result=new StringBuilder();
+        str2.reverse();
+        str1.reverse();
+        int carry=0;
+        int tmp1,tmp2;
+        int i=0;
+        while(i<str1.length()||i<str2.length()){
+        	tmp1=i<str1.length()?str1.charAt(i)-'0':0;
+        	tmp2=i<str2.length()?str2.charAt(i)-'0':0;
+        	result.append((tmp1+tmp2+carry)%2);
+        	carry=(tmp1+tmp2+carry)/2;
+        	i++;
+        }
+        if(carry==1)result.append(1);
+        return result.reverse().toString();
+    }
+}
+-------------------------------------
