@@ -1,0 +1,85 @@
+METHOD ONE(13.01% 16ms)
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length==0)return "";
+        if(strs.length==1)return strs[0];
+        StringBuilder result=new StringBuilder();
+		for(int j=0;;j++){
+			for(int i=0;i<strs.length-1;i++){
+				if(j>=strs[i].length()||j>=strs[i+1].length()||strs[i].charAt(j)!=strs[i+1].charAt(j)){
+					 return result.toString();
+				}
+			}
+			result.append(strs[0].charAt(j));
+		}
+    }
+}
+-----------------------------------------------------------------
+METHOD TWO(17.37% 15ms)
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+       if(strs.length==0)return "";
+		String result=strs[0];
+		for(int i=1;i<strs.length;i++){
+			result=commonPrefix(result,strs[i]);
+		}
+		return result;
+    }
+    public String commonPrefix(String str1,String str2){
+    	if(str1.length()==0||str2.length()==0)return "";
+    	int i;
+    	for(i=0;;i++){
+    		if(i>=str1.length()||i>=str2.length()||str1.charAt(i)!=str2.charAt(i)){
+    			break;
+    		}
+    	}
+    	return str1.substring(0,i);
+    }
+}
+-------------------------------------------------------------------
+METHOD 2.1(49.64% 12ms)
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+       if(strs.length==0)return "";
+		String result=strs[0];
+		for(int i=1;i<strs.length;i++){
+		    
+			result=commonPrefix(result,strs[i]);
+			if(result.length()==0)return result;
+		}
+		return result;
+    }
+    public String commonPrefix(String str1,String str2){
+    	if(str1.length()==0||str2.length()==0)return "";
+    	int i;
+    	for(i=0;;i++){
+    		if(i>=str1.length()||i>=str2.length()||str1.charAt(i)!=str2.charAt(i)){
+    			break;
+    		}
+    	}
+    	return str1.substring(0,i);
+    }
+}
+------------------------------------------------------------------------
+METHOD 2.2(67.62%,11ms) CHANGES AS THE TEST CASES CHANGES
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+       if(strs.length==0)return "";
+		String result=strs[0];
+		for(int i=1;i<strs.length;i++){
+		    if(result.length()==0)return result;
+			result=commonPrefix(result,strs[i]);
+		}
+		return result;
+    }
+    public String commonPrefix(String str1,String str2){
+    	if(str1.length()==0||str2.length()==0)return "";
+    	int i;
+    	for(i=0;;i++){
+    		if(i>=str1.length()||i>=str2.length()||str1.charAt(i)!=str2.charAt(i)){
+    			break;
+    		}
+    	}
+    	return str1.substring(0,i);
+    }
+}
