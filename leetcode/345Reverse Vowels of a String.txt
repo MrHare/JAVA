@@ -1,0 +1,47 @@
+METHOD ONE(72.52% 7ms)
+public class Solution {
+    public String reverseVowels(String s) {
+        StringBuilder str=new StringBuilder(s);
+        int start=0;
+        int end=str.length()-1;
+        char ch;
+        while(start<end){
+            while(start<end&&!isVowel(str.charAt(start)))start++;
+            while(start<end&&!isVowel(str.charAt(end)))end--;
+            if(start<end){
+                ch=str.charAt(start);
+                str.setCharAt(start,str.charAt(end));
+                str.setCharAt(end,ch);
+            }
+            start++;
+            end--;
+        }
+        return str.toString();
+    }
+    public boolean isVowel(char ch){
+        return ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'||ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U';
+    }
+}
+---------------------------------------------
+METHOD TWO(57.15% 11ms)
+public class Solution {
+    public String reverseVowels(String s) {
+        String vowels="aeiouAEIOU";
+        StringBuilder str=new StringBuilder(s);
+        int start=0;
+        int end=str.length()-1;
+        char ch;
+        while(start<end){
+            while(start<end&&vowels.indexOf(str.charAt(start))==-1)start++;
+            while(start<end&&vowels.indexOf(str.charAt(end))==-1)end--;
+            if(start<end){
+                ch=str.charAt(start);
+                str.setCharAt(start,str.charAt(end));
+                str.setCharAt(end,ch);
+            }
+            start++;
+            end--;
+        }
+        return str.toString();
+    }
+}

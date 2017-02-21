@@ -1,0 +1,141 @@
+METHOD ONE(4.84% 63ms)
+public class Solution {
+    public int magicalString(int n) {
+        if(n<=0)return 0;
+        if(n<=3)return 1;
+        StringBuilder str=new StringBuilder("122");
+        int result=0;
+        int len=0;
+        int flag=1;
+        int ext=2;// the begin index of extend
+        int i=0;
+        while(len<n){
+        	for(;i<ext;i++){
+        		len+=str.charAt(i)-'0';
+        	}
+        	if(len>=n)break;
+        	for(int k=0;k<str.charAt(ext)-'0';k++){
+        		str.append(flag);
+        	}
+        	ext++;
+        	flag=flag==1?2:1;	/////////////////
+        }
+        System.out.println(str.toString());
+        for(int k=0;2*k<ext;k++){
+        	result+=str.charAt(2*k)-'0';
+        }
+        System.out.println("len="+len);
+        System.out.println("ext="+ext);
+        System.out.println("flag="+flag);
+        if(len>n&&flag==2)result--;
+        return result;
+    }
+}
+--------------------------------------------------------
+METHOD TWO(10.16%)
+public class Solution {
+    public int magicalString(int n) {
+        if(n<=0)return 0;
+        if(n<=3)return 1;
+        StringBuilder str=new StringBuilder("122");
+        int result=0;
+        int len=0;
+        int flag=1;
+        int ext=2;// the begin index of extend
+        int i=0;
+        while(len<n){
+        	for(;i<ext;i++){
+        		len+=str.charAt(i)-'0';
+        	}
+        	if(len>=n)break;
+        	for(int k=0;k<str.charAt(ext)-'0';k++){
+        		str.append(flag);
+        	}
+        	ext++;
+        	flag=flag^3;////////////////////////////MORE FAST!!	
+        }
+        System.out.println(str.toString());
+        for(int k=0;2*k<ext;k++){
+        	result+=str.charAt(2*k)-'0';
+        }
+        if(len>n&&flag==2)result--;
+        return result;
+    }
+}
+-----------------------------------------------------------------
+METHOD THREE(22.19% 40ms)
+public class Solution {
+    public int magicalString(int n) {
+        if(n<=0)return 0;
+		if(n<=3)return 1;
+        StringBuilder str=new StringBuilder("122");
+        int result=0;
+        int flag=1;
+        int ext=2;// the begin index of extend
+        while(str.length()<n){
+        	for(int k=0;k<str.charAt(ext)-'0';k++){
+        		str.append(flag);
+        	}
+        	ext++;
+        	flag=flag^3;	
+        }
+        for(int k=0;k<n;k++){
+        	if(str.charAt(k)=='1')result++;
+        }
+        return result;
+    }
+}
+----------------------------------------------------------------------
+METHOD FOUR(38.21%)
+public class Solution {
+    public int magicalString(int n) {
+        if(n<=0)return 0;
+		if(n<=3)return 1;
+        StringBuilder str=new StringBuilder("122");
+        int result=1;
+        int flag=1;
+        int ext=2;// the begin index of extend
+        for(;str.length()<n;ext++){
+        	if(str.charAt(ext)=='1'){
+        		str.append(flag);
+        		result++;
+        	}else{
+        		str.append(flag);
+        		str.append(flag);
+        	}
+        	flag^=3;
+        }
+        for(int k=ext;k<n;k++){
+        	if(str.charAt(k)=='1')result++;
+        }
+        return result;
+    }
+}
+------------------------------------------------------------------------
+METHOD FIVE(98.72% 10 ms)
+public class Solution {
+    public int magicalString(int n) {
+        if(n<=0)return 0;
+		if(n<=3)return 1;
+        int[] str=new int[n+1];
+        str[0]=1;str[1]=str[2]=2;
+        int result=1;
+        int flag=1;
+        int ext=2;// the begin index of extend
+        int len=3;
+        for(;len<n;ext++){
+        	if(str[ext]==1){
+        		str[len++]=flag;
+        		result++;
+        	}else{
+        		str[len++]=flag;
+        		str[len++]=flag;
+        	}
+        	flag^=3;
+        }
+        for(int k=ext;k<n;k++){
+        	if(str[k]==1)result++;
+        }
+        return result;
+    }
+}
