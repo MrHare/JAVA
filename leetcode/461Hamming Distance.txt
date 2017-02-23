@@ -1,0 +1,25 @@
+METHOD ONE(33.75% 12ms)
+public class Solution {
+    public int hammingDistance(int x, int y) {
+        x=x^y;
+        int result=0;
+        while(x>0){
+            if(x%2==1)result++;
+            x/=2;
+        }
+        return result;
+    }
+}
+--------------------------------
+METHOD TWO(89.95% 10ms  T1.1)
+public class Solution {
+    public int hammingDistance(int x, int y) {
+        x=x^y;
+        int result=0;
+        while(x>0){
+            result+=x%2;
+            x/=2;
+        }
+        return result;
+    }
+}
