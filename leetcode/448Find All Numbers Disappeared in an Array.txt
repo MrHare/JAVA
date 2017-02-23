@@ -1,0 +1,50 @@
+METHOD ONE TIME EXCEED
+public class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int res=0;
+        int result=0;
+        for(int n:nums){
+            if(n==1){
+                result++;
+            }else{
+                result=0;
+                continue;
+            }
+            res=result>res?result:res;
+        }
+        return res;
+    }
+}
+------------------------------------------------------------
+METHOD TWO(28.85% 20ms)
+public class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> result=new LinkedList<Integer>();
+        int n=nums.length;
+        if(n==0)return result;
+        for(int i:nums){
+            nums[i%n]+=n;
+        }
+        if(nums[0]<=n)result.add(n);
+        for(int i=1;i<n;i++){
+            if(nums[i]<=n)result.add(i);
+        }
+        return result;
+    }
+}
+-----------------------------------------------------------------
+METHOD THREE(75.74 16ms) little change makes big different
+public class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> result=new LinkedList<Integer>();
+        int n=nums.length;
+        for(int i:nums){
+            nums[i%n]+=n;
+        }
+        if(n>0&&nums[0]<=n)result.add(n);
+        for(int i=1;i<n;i++){
+            if(nums[i]<=n)result.add(i);
+        }
+        return result;
+    }
+}

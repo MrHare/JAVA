@@ -1,0 +1,51 @@
+METHOD ONE(11.38% 9ms)
+public class Solution {
+    public String[] findWords(String[] words) {
+        String[] pattern={"[qwertyuiopQWERTYUIOP]*","[ASDFGHJKLasdfghjkl]*","[zxcvbnmZXCVBNM]*"};
+        int result=0;
+        for(int i=0;i<words.length;i++){
+            if(words[i].matches(pattern[0])||words[i].matches(pattern[1])||words[i].matches(pattern[2])){
+                result++;
+            }else{
+                words[i]=null;
+            }
+        }
+        String[] res=new String[result];
+        int i=0;
+        for(String str:words){
+            if(str!=null)res[i++]=str;
+        }
+        return res;
+    }
+}
+---------------------------------------------------------------
+METHOD TWO(81.85% 3ms)
+public class Solution {
+    public String[] findWords(String[] words) {
+        String[] pattern={"qwertyuiopQWERTYUIOP","ASDFGHJKLasdfghjkl","zxcvbnmZXCVBNM"};
+        int result=words.length;
+        int flag=0;        
+        for(int i=0;i<words.length;i++){
+            if(words[i]==null)continue;
+            for(int j=0;j<3;j++){
+                if(pattern[j].indexOf(words[i].charAt(0))!=-1){
+                    flag=j;
+                    break;
+                }
+            }
+            for(int k=1;k<words[i].length();k++){
+                if(pattern[flag].indexOf(words[i].charAt(k))==-1){
+                    words[i]=null;
+                    result--;
+                    break;
+                }
+            }
+        }
+        String[] res=new String[result];
+        int i=0;
+        for(String str:words){
+            if(str!=null)res[i++]=str;
+        }
+        return res;
+    }
+}

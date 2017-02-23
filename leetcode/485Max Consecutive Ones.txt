@@ -1,0 +1,51 @@
+METHOD ONE(34.21% 12ms)
+public class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int res=0;
+        int result=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==1){
+                result=1;
+                i++;
+                while(i<nums.length&&nums[i]==1){
+                    result++;i++;
+                }
+            }else{
+                continue;
+            }
+            if(result>res)res=result;
+        }
+        return res;
+    }
+}
+--------------------------------------------------------
+METHOD TWO(34..12% 12ms)
+public class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int res=0;
+        int result=0;
+        for(int n:nums){
+            result=n==0?0:result+1;
+            if(result>res)res=result;
+        }
+        return res;
+    }
+}
+-----------------------------------------------------------------------
+METHOD THREE(49.02% 11ms)
+public class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int res=0;
+        int result=0;
+        for(int n:nums){
+            if(n==1){
+                result++;
+            }else{
+                result=0;
+                continue;
+            }
+            res=result>res?result:res;
+        }
+        return res;
+    }
+}

@@ -1,0 +1,62 @@
+METHOD ONE(7.52% 5ms)//use function split of String
+public class Solution {
+    public int countSegments(String s) {
+        if(s.length()==0)return 0;
+        String[] strs=s.split(" ");
+        int result=strs.length;
+        for(int i=0;i<strs.length;i++){
+            if(strs[i].length()==0)result--;
+        }
+        return result;
+    }
+}
+-----------------------------------
+METHOD TWO(33.03% 3ms T2)
+public class Solution {
+    public int countSegments(String s) {
+        s=s.trim();
+        if(s.length()==0)return 0;
+        int result=0;
+        int flag=0;
+        for(int i=0;i<s.length();i++){
+            while(s.charAt(i)==' '){
+                flag=1;
+                i++;
+            }
+            result+=flag;
+            flag=0;
+        }
+        return result+1;
+    }
+}
+--------------------------------------------
+METHOD THREE(33.03% 3ms T2)I think is faster than method two
+public class Solution {
+    public int countSegments(String s) {
+        s=s.trim();
+        if(s.length()==0)return 0;
+        int result=0;
+        int flag=0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==' '){
+                i++;
+                while(s.charAt(i)==' ')i++;
+                result++;
+            }
+        }
+        return result+1;
+    }
+}
+---------------------------------------------------
+METHOD FOUR(33.03% 3ms T2) more faster
+public class Solution {
+    public int countSegments(String s) {
+        int result=0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)!=' '&&(i==0||s.charAt(i-1)==' ')){
+                result++;
+            }
+        }
+        return result;
+    }
+}
