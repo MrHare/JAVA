@@ -1,0 +1,39 @@
+METHOD ONE(11.75% 15ms)
+public class Solution {
+    public int findComplement(int num) {
+        int result=0;
+        int flag=1;
+        while(num>0){
+            result+=(1-num%2)*flag;
+            num/=2;
+            flag*=2;
+        }
+        return result;
+    }
+}
+------------------------------------------------
+METHOD TWO(58.89% 11ms)
+public class Solution {
+    public int findComplement(int num) {
+        int n=num;
+        int flag=1;
+        while(n>0){
+            n/=2;
+            flag*=2;
+        }
+        return flag-num-1;
+    }
+}
+--------------------------------------
+METHOD THREE(24.35% 13ms)
+public class Solution {
+    public int findComplement(int num) {
+        int n=num;
+        int flag=32;
+        while(n>0){
+            n/=2;
+            flag--;
+        }
+        return (-1>>>flag)^num;
+    }
+}
