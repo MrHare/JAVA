@@ -1,0 +1,41 @@
+METHOD ONE(53.10% 9ms)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root==null)return 0;
+        if(root.left!=null){
+            if(root.left.left==null&&root.left.right==null){
+                return sumOfLeftLeaves(root.right)+root.left.val;
+            }
+        }
+        return sumOfLeftLeaves(root.left)+sumOfLeftLeaves(root.right);
+    }
+}
+-------------------------------------------------------------------------
+METHOD 1.1(81.80% 8ms)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root==null)return 0;
+        if(root.left!=null&&root.left.left==null&&root.left.right==null){
+            return sumOfLeftLeaves(root.right)+root.left.val;
+        }
+        return sumOfLeftLeaves(root.left)+sumOfLeftLeaves(root.right);
+    }
+}
