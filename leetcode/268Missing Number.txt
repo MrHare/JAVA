@@ -1,0 +1,21 @@
+METHOD ONE(T1 23.42% 2ms)
+public class Solution {
+    public int missingNumber(int[] nums) {
+        int result=0;
+        for(int n:nums){
+            result+=n;
+        }
+        return nums.length*(nums.length+1)/2-result;
+    }
+}
+------------------------------------------
+METHOD TWO(T1 1ms 42.86%)
+public class Solution {
+    public int missingNumber(int[] nums) {
+        int result=0;
+        for(int i=0;i<nums.length;i++){
+            result=result^(i+1)^nums[i];
+        }
+        return result;
+    }
+}

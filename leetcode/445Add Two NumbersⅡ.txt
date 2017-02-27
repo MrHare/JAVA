@@ -1,0 +1,43 @@
+MEHTOD ONE(60.41% 62ms)
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> s1=new Stack<Integer>();
+        Stack<Integer> s2=new Stack<Integer>();
+        int tmp1=0;
+        int tmp2=0;
+        int carry=0;
+        ListNode head=null;
+        while(l1!=null){
+            s1.push(l1.val);
+            l1=l1.next;
+        }
+        while(l2!=null){
+            s2.push(l2.val);
+            l2=l2.next;
+        }
+        while(!s1.empty()||!s2.empty()){
+            tmp1=s1.empty()?0:s1.pop();
+            tmp2=s2.empty()?0:s2.pop();
+            int sum=tmp1+tmp2+carry;
+            carry=sum/10;
+            ListNode node=new ListNode(sum%10);
+            node.next=head;
+            head=node;
+        }
+        if(carry!=0){
+            ListNode node=new ListNode(carry);
+            node.next=head;
+            head=node;
+        }
+        return head;
+    }
+}
+------------------------------------------------------------------------
