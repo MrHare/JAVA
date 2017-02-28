@@ -1,0 +1,47 @@
+METHOD ONE(29.26% 6ms)
+public class Solution {
+    public int searchInsert(int[] nums, int target) {
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>=target)return i;
+        }
+        return nums.length;
+    }
+}
+------------------------------------------
+METHOD TWO(29.26% 6ms)
+public class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int start=0;
+        int end=nums.length-1;
+        int mid=0;
+        while(start<end){
+            mid=(start+end)/2;
+            if(nums[mid]==target)return mid;
+            if(nums[mid]<target){
+                start=mid+1;
+            }else{
+                end=mid-1;
+            }
+        }
+        return nums[start]<target?start+1:start;
+    }
+}
+------------------------------------------------------------
+METHOD 2.2(29.26% 6ms)
+public class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int start=0;
+        int end=nums.length-1;
+        int mid=0;
+        while(start<=end){                ////little change
+            mid=(start+end)/2;
+            if(nums[mid]==target)return mid;
+            if(nums[mid]<target){
+                start=mid+1;
+            }else{
+                end=mid-1;
+            }
+        }
+        return start;                   /////////
+    }
+}
