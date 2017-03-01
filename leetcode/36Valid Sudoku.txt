@@ -1,0 +1,69 @@
+tips:
+filter the character of '.'
+use return value of method  .add of HashSet<Character>to check the whether the num was added before
+---------------------------
+METHOD ONE(11.53% 46ms)
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        for(int i=0;i<9;i++){
+            HashSet<Character> hSet=new HashSet<Character>();
+            for(int j=0;j<9;j++){
+                if(addChar(board[i][j],hSet))return false;
+            }
+        }
+        for(int i=0;i<9;i++){
+            HashSet<Character> hSet=new HashSet<Character>();
+            for(int j=0;j<9;j++){
+                if(addChar(board[j][i],hSet))return false;
+            }
+        }
+        for(int i=0;i<9;){
+            for(int j=0;j<9;){
+                HashSet<Character> hSet=new HashSet<Character>();
+                for(int m=0;m<3;m++){
+                    for(int n=0;n<3;n++){
+                        if(addChar(board[i+m][j+n],hSet))return false;
+                    }
+                }
+                j+=3;
+            }
+            i+=3;
+        }
+        return true;
+    }
+    public boolean addChar(char ch,HashSet<Character> hSet){
+        if(ch=='.')return false;
+        return !hSet.add(ch);
+    }
+}
+---------------------------------------------------------------------------
+METHOD TWO(73.34%,32ms)
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        for(int i=0;i<9;i++){
+            HashSet<Character> hSet=new HashSet<Character>();
+            for(int j=0;j<9;j++){
+                if(board[i][j]!='.'&&!hSet.add(board[i][j]))return false;
+            }
+        }
+        for(int i=0;i<9;i++){
+            HashSet<Character> hSet=new HashSet<Character>();
+            for(int j=0;j<9;j++){
+                if(board[j][i]!='.'&&!hSet.add(board[j][i]))return false;
+            }
+        }
+        for(int i=0;i<9;){
+            for(int j=0;j<9;){
+                HashSet<Character> hSet=new HashSet<Character>();
+                for(int m=0;m<3;m++){
+                    for(int n=0;n<3;n++){
+                        if(board[m+i][n+j]!='.'&&!hSet.add(board[m+i][n+j]))return false;
+                    }
+                }
+                j+=3;
+            }
+            i+=3;
+        }
+        return true;
+    }
+}
