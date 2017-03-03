@@ -1,0 +1,21 @@
+METHOD ONE£¨T1 30.44% 1ms£©
+public class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result=new ArrayList<List<Integer>>();
+        if(numRows<=0)return result;
+        List<Integer> array=new ArrayList<Integer>();
+        array.add(1);
+        result.add(array);
+        for(int i=2;i<=numRows;i++){
+        	List<Integer> tmp=new ArrayList<Integer>();
+        	tmp.add(1);
+        	for(int j=1;j<i-1;j++){
+        		tmp.add(array.get(j-1)+array.get(j));
+        	}
+        	tmp.add(1);
+        	result.add(tmp);
+        	array=tmp;
+        }
+        return result;
+    }
+}

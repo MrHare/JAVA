@@ -1,0 +1,84 @@
+WRONG IDEA1
+each sub-tree of a balanced binary tree is a balanced tree    RIGHT
+a binary tree whose all sub-tree are balaced binary tree is balaced binary tree WRONG 
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root==null)return true;
+        if(root.left!=null&&root.right!=null){
+            return isBalanced(root.left)&&isBalanced(root.right);
+        }else{
+            if(root.left==null){
+                return root.right==null||root.right.left==null&&root.right.right==null;
+            }else{
+                return root.left.left==null&&root.left.right==null;
+            }
+        }
+    }
+}
+------------------------------------------------------------
+compare height
+method one(6.62% 4ms)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root==null)return true;
+        int dif=height(root.right)-height(root.left);
+        if(dif*dif>1)return false;
+        return isBalanced(root.right)&&isBalanced(root.left);
+        
+    }
+    public int height(TreeNode node){
+        if(node==null)return 0;
+        return Integer.max(height(node.left),height(node.right))+1;
+    }
+}
+---------------------------------------------------------------------------
+WRONG IDEA2
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root==null)return true;
+        TreeSet<Integer> treeSet=new TreeSet<Integer>();
+        visit(root,0,treeSet);
+        return treeSet.last()-treeSet.first()<=1;
+        
+    }
+    public void visit(TreeNode node,int depth,TreeSet<Integer> treeSet){
+        int left=depth+1;
+        int right=depth+1;
+        if(node==null){
+            treeSet.add(depth);
+            if(treeSet.last()-treeSet.first()>1)return;
+        }else{
+            visit(node.left,left,treeSet);
+            visit(node.right,right,treeSet);
+        }
+    }
+}
+WRONG IDEA2
+1223333444444NN55 is a binary tree...
