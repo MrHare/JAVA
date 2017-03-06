@@ -1,0 +1,28 @@
+METHOD ONE(47.64%% 8ms)
+public class Solution {
+    public String toHex(int num) {
+        if(num==0)return "0";
+        StringBuilder result=new StringBuilder();
+        while(num!=0){
+            char tmp=(char)(num&15);
+            tmp=(char)(tmp<10?tmp+'0':tmp-10+'a');
+            result.append(tmp);
+            num=num>>>4;
+        }
+        return result.reverse().toString();
+    }
+}
+------------------------------------
+METHOD TWO(14.98% 10ms)
+public class Solution {
+    public String toHex(int num) {
+        char[] cArray={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+        if(num==0)return "0";
+        StringBuilder result=new StringBuilder();
+        while(num!=0){
+            result.append(cArray[num&15]);
+            num=num>>>4;
+        }
+        return result.reverse().toString();
+    }
+}
