@@ -1,0 +1,83 @@
+METHOD ONE(5.40% 346ms)
+public class LRUCache {
+    int[][] nArray;
+    int time=0;
+    int cap=0;
+    int size=0;
+    public LRUCache(int capacity){
+        cap=capacity;
+        nArray=new int[capacity][3];
+    }
+    
+    public int get(int key) {
+        for(int i=0;i<size;i++){
+            if(nArray[i][0]==key){
+                nArray[i][2]=time++;
+                return nArray[i][1];
+            }
+        }
+        return -1;
+    }
+    
+    public void put(int key, int value) {
+        int index;
+        for(int i=0;i<size;i++){
+            if(nArray[i][0]==key){
+                nArray[i][1]=value;
+                nArray[i][2]=time++;
+                return;
+            }
+        }
+        if(size>=cap){
+            index=0;
+            for(int i=0;i<cap;i++){
+                if(nArray[index][2]>nArray[i][2])index=i;
+            }
+        }else{
+            index=size;
+        }
+        nArray[index][0]=key;
+        nArray[index][1]=value;
+        nArray[index][2]=time++;
+        if(size<cap)size++;
+    }
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
+---------------------------------------------------
+METHOD TWO(87.63% 146ms)
+public class LRUCache {
+    mMap<Integer,Integer> lHMap;
+    class mMap<K,V> extends LinkedHashMap<K,V>{
+        int MAX_ENTRIES;
+        mMap(int capacity){
+            super(capacity,0.75f,true);
+            MAX_ENTRIES=capacity;
+        }
+        protected boolean removeEldestEntry(Map.Entry eldest) {
+            return size() > MAX_ENTRIES;
+        }
+    }
+    public LRUCache(int capacity){
+        lHMap=new mMap<Integer,Integer>(capacity);
+        
+    }
+    public int get(int key) {
+        Integer res=lHMap.get(key);
+        return res==null?-1:res;
+    }
+    public void put(int key, int value) {
+        lHMap.put(key,value);
+    }
+}
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */

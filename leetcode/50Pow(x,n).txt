@@ -1,0 +1,44 @@
+MTHOD ONE(62.66% 21ms)
+x-->x*x;
+n-->n/2;
+public class Solution {
+    public double myPow(double x, int n) {
+        if(n==0)return 1;
+        double result=1;
+        if(n<0){
+            x=1/x;
+            result=x;
+            n++;
+            n=-n;
+            
+        }
+        if(n==0)return result;
+        while(n>1){
+            if(n%2==1){
+                result*=x;
+            }
+            x=x*x;
+            n/=2;
+        }
+        return result*x;
+    }
+}
+-----------------------------------------------------
+METHOD TWO(77.7% 20ms)
+public class Solution {
+    public double myPow(double x, int n) {
+        if(n==0)return 1;
+        double result=1;
+        if(n<0){
+            x=1/x;
+        }
+        while(n!=0){
+            if(n%2!=0){
+                result*=x;
+            }
+            x=x*x;
+            n/=2;
+        }
+        return result;
+    }
+}
