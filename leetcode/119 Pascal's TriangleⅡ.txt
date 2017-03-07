@@ -1,0 +1,122 @@
+C0n,C1n....Cnn;
+WRONG IDEA,
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> list=new ArrayList<Integer>();
+        list.add(1);
+        for(int i=1;i<=rowIndex;i++){
+            list.add(foo(rowIndex,i));
+        }
+        return list;
+    }
+    public int foo(int row,int i){
+        int result=1;
+        int tmp=1;
+        if(i>row/2)i=row-i;
+        while(i>0){
+            result*=row;      ///result maybe overflaw!!!!!
+            tmp*=i;
+            row--;
+            i--;
+        }
+        return result/tmp;
+    }
+}
+------------------------------------------------------------
+WRONG IDEA!!!(THIS IS A VALID IDEA IF NOT CONSIDER THE OVERFLAW OR LIMIT THE ROWINDEX
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> list=new ArrayList<Integer>();
+        list.add(1);
+        for(int i=1;i<=rowIndex;i++){
+            list.add(foo(rowIndex,i));
+        }
+        return list;
+    }
+    public int foo(int rowIndex,int n){
+    	if(n>rowIndex/2)n=rowIndex-n;
+        if(n==0)return 1;
+        int row=rowIndex;
+        int result=row;
+        row--;
+        for(int i=2;i<=n;i++){
+        	result*=row;///////////////still maybe overflaw!!!!!!!!!!!!!!!
+        	result/=i;
+        	row--;
+        }
+        return result;
+    }
+}
+--------------------------------------------
+METHOD ONE(17.29% 3ms T3)
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> array=new ArrayList<Integer>();
+        if(rowIndex==0){
+        	array.add(1);
+        	return array;
+        }
+        for(int i=1;i<=rowIndex+1;i++){
+        	List<Integer> tmp=new ArrayList<Integer>();
+        	tmp.add(1);
+        	for(int j=1;j<i-1;j++){
+        		tmp.add(array.get(j-1)+array.get(j));
+        	}
+        	tmp.add(1);
+        	array=tmp;
+        }
+        return array;
+    }
+}
+-------------------------------------------------------
+ SMART SOLUTION!
+ only one array
+ 1
+ 11
+ 111-->121
+ 1121-->1331
+ 11331-->146641
+--
+  public List<Integer> getRow(int rowIndex) {
+	List<Integer> list = new ArrayList<Integer>();
+	if (rowIndex < 0)
+		return list;
+
+	for (int i = 0; i < rowIndex + 1; i++) {
+		list.add(0, 1);
+		for (int j = 1; j < list.size() - 1; j++) {
+			list.set(j, list.get(j) + list.get(j + 1));
+		}
+	}
+	return list;
+}
+---------------------------------------------------------------------------
+METHOD TWO(88.41% 1ms)
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        Integer[] result=new Integer[rowIndex+1];///////////////////////////////!!!INTEGER IS NEEDED,INT IS WRONG!!
+        result[0]=1;
+        for(int i=1;i<=rowIndex;i++){
+        	result[i]=1;
+            for(int j=i-1;j>0;j--){
+                result[j]=result[j]+result[j-1];
+            }         
+        }
+        return Arrays.asList(result);
+    }
+}
+------------------------------------------------------------
+METHOD THREE
+public class Solution {
+    public List<Integer> getRow(int k) {
+        Integer[] arr = new Integer[k + 1];
+        Arrays.fill(arr, 0);			/////INITIALIZATION IS NEEDED ,!!!
+        arr[0] = 1;
+        
+        for (int i = 1; i <= k; i++) 
+            for (int j = i; j > 0; j--) 
+                arr[j] = arr[j] + arr[j - 1];
+        
+        return Arrays.asList(arr);
+    }
+}

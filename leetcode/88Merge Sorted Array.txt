@@ -1,0 +1,20 @@
+METHOD ONE(47.92% 0ms T1)
+public class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int len=m+n-1;
+        m--;
+        n--;
+        int tmp;
+        while(m>=0||n>=0){
+            int tmp1=m>=0?nums1[m]:Integer.MIN_VALUE;
+            int tmp2=n>=0?nums2[n]:Integer.MIN_VALUE;
+            if(tmp1>=tmp2){
+                nums1[len--]=tmp1;
+                m--;
+            }else{
+                nums1[len--]=tmp2;
+                n--;
+            }
+        }
+    }
+}
