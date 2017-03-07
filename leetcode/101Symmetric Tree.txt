@@ -1,0 +1,30 @@
+METHOD ONE(24.23% 1ms T1)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root==null)return true;
+        return visit(root.left,root.right);
+    }
+    public boolean visit(TreeNode left,TreeNode right){
+        if(left==null&&right==null)return true;
+        if(left!=null&&right!=null){
+            if(left.val!=right.val){
+                return false;
+            }else{
+                return visit(left.left,right.right)&&visit(left.right,right.left);
+            }
+        }else{
+            return false;
+        }
+    }
+}
+----------------------
+how about non-recursive(use stack)

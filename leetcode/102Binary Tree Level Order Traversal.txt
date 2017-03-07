@@ -1,0 +1,64 @@
+MTHOED ONE(42.64% 2ms)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        int end=0;
+        List<List<Integer>> result=new ArrayList<List<Integer>>();
+        if(root==null)return result;
+        ArrayList<Integer> tmpList=new ArrayList<Integer>();
+        
+        ArrayList<TreeNode> treeList=new ArrayList<TreeNode>();
+        treeList.add(root);
+        for(int index=0;index<treeList.size();index++){
+            TreeNode node=treeList.get(index);
+            if(node.left!=null)treeList.add(node.left);
+            if(node.right!=null)treeList.add(node.right);
+            tmpList.add(node.val);
+            if(index==end){
+                result.add(tmpList);
+                tmpList=new ArrayList<Integer>();
+                end=treeList.size()-1;
+            }
+        }
+        return result;
+    }
+}
+------------------------------------------------------------------
+METHOD TWO(43.64% 2ms)
+idea:DFS vist the tree
+add a initialition List for every depth(when visit that level)
+use the information of depth to add the val to the very List
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result=new ArrayList<List<Integer>>();
+        visit(result,root,0);
+        return result;
+    }
+    public void visit(List<List<Integer>> result,TreeNode root,int depth){
+        if(root==null)return;
+        if(result.size()<=depth){
+            result.add(new ArrayList<Integer>());
+        }
+        result.get(depth).add(root.val);
+        visit(result,root.left,depth+1);
+        visit(result,root.right,depth+1);
+    }
+}
