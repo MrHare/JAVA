@@ -1,0 +1,55 @@
+METHOD ONE(3.32% 2ms)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        Stack<TreeNode> treeStack=new Stack<TreeNode>();
+        List<Integer> result=new ArrayList<Integer>();
+        if(root!=null)treeStack.push(root);
+        TreeNode tmp;
+        while(!treeStack.isEmpty()){
+            tmp=treeStack.pop();
+            if(tmp.right!=null)treeStack.push(tmp.right);
+            if(tmp.left!=null)treeStack.push(tmp.left);
+            result.add(tmp.val);
+        }
+        return result;
+    }
+}
+-----------------------------------------------------
+METHOD TWO(36.23% 1ms)
+NOTICE: the left child would be the next node after the parent,
+ 	so it is not needn't push it in the stack
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        Stack<TreeNode> treeStack=new Stack<TreeNode>();
+        List<Integer> result=new ArrayList<Integer>();
+        while(root!=null){
+            result.add(root.val);
+            if(root.right!=null){
+                treeStack.push(root.right);
+            }
+            root=root.left;
+            if(root==null&&!treeStack.isEmpty()){
+                root=treeStack.pop();
+            }
+        }
+        return result;
+    }
+}

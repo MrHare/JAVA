@@ -1,0 +1,29 @@
+METHOD ONE(87.44% 10ms)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> result=new ArrayList<Integer>();
+        if(root==null)return result;
+        visit(result,root,0);
+        return result;
+    }
+    public void visit(List<Integer> result,TreeNode root,int depth){
+        if(depth>=result.size()){
+            result.add(root.val);
+        }else{
+            if(result.get(depth)<root.val){
+                result.set(depth,root.val);
+            }
+        }
+        if(root.left!=null)visit(result,root.left,depth+1);
+        if(root.right!=null)visit(result,root.right,depth+1);
+    }
+}
