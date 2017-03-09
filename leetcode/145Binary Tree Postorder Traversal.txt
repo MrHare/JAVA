@@ -1,0 +1,86 @@
+METHOD ONE(8.78% 2ms£©
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result =new ArrayList<Integer>();
+        Stack<TreeNode> treeStack=new Stack<TreeNode>();
+        if(root==null)return result;
+        while(root!=null){
+            if(root.left!=null||root.right!=null){
+                treeStack.push(root);
+                if(root.left==null){
+                    root=root.right;
+                }else{
+                    if(root.right!=null){
+                        treeStack.push(root.right);
+                    }
+                    root=root.left;
+                }
+            }else{
+                result.add(root.val);
+                TreeNode tmp=null;
+                if(!treeStack.isEmpty())tmp=treeStack.pop();
+                while(tmp!=null&&(tmp.left==root||tmp.right==root)){
+                    result.add(tmp.val);
+                    root=tmp;
+                    tmp=null;
+                    if(!treeStack.isEmpty())tmp=treeStack.pop();
+                }
+                root=tmp;
+            }
+        }
+        return result;
+    }
+}
+---------------------------------------------------------------------
+little change
+METHOD 1.1(8.78% 2ms£©
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result =new ArrayList<Integer>();
+        Stack<TreeNode> treeStack=new Stack<TreeNode>();
+        if(root==null)return result;
+        while(root!=null){
+            if(root.left!=null||root.right!=null){
+                treeStack.push(root);
+                if(root.right!=null){
+                    treeStack.push(root.right);
+                }
+                if(root.left!=null){
+                    root=root.left;
+                }else{
+                    root=treeStack.pop();
+                }
+            }else{
+                result.add(root.val);
+                TreeNode tmp=null;
+                if(!treeStack.isEmpty())tmp=treeStack.pop();
+                while(tmp!=null&&(tmp.left==root||tmp.right==root)){
+                    result.add(tmp.val);
+                    root=tmp;
+                    tmp=null;
+                    if(!treeStack.isEmpty())tmp=treeStack.pop();
+                }
+                root=tmp;
+            }
+        }
+        return result;
+    }
+}

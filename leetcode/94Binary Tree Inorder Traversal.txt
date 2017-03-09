@@ -1,0 +1,32 @@
+METHOD ONE(44.05% 1ms T2)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result=new ArrayList<Integer>();
+        Stack<TreeNode> treeStack=new Stack<TreeNode>();
+        if(root==null)return result;
+        while(root!=null){
+            if(root.left!=null){
+                treeStack.push(root);
+                root=root.left;
+            }else{
+                result.add(root.val);
+                while(root.right==null&&!treeStack.isEmpty()){
+                    root=treeStack.pop();
+                    result.add(root.val);
+                }
+                root=root.right;
+            }
+        }
+        return result;
+        
+    }
+}
