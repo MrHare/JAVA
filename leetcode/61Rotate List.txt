@@ -1,0 +1,65 @@
+METHOD ONE(58.73% 17ms)
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null||k==0)return head;
+        int length=1;
+        ListNode first=head;
+        ListNode end;
+        while((first=first.next)!=null)length++;
+        k%=length;
+        first=head;
+        for(int i=0;i<k;i++){
+            first=first.next;
+        }
+        end=head;
+        while(first.next!=null){
+            first=first.next;
+            end=end.next;
+        }
+        first.next=head;
+        head=end.next;
+        end.next=null;
+        return head; 
+    }
+}
+-------------------------------------------------------------
+METHOD TWO(58.73% 17ms)
+rotate the first length-k to the end is more faster than method one
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null||k==0)return head;
+        int length=1;
+        ListNode tail=head;
+        ListNode travel;
+        //while((tail=tail.next)!=null)length++;////////////WROING IDEA,THOUNG THE LENGTH WOULD BE SAME,BUT THE TAIL WOULD BE NULL
+        while(tail.next!=null){
+            tail=tail.next;
+            length++;
+        }
+        k%=length;
+        if(k==0)return head; 
+        k=length-k-1;
+        travel=head;
+        for(int i=0;i<k;i++)travel=travel.next;
+        tail.next=head;
+        head=travel.next;
+        travel.next=null;
+        return head;
+    }
+}

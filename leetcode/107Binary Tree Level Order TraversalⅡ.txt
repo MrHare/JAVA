@@ -1,0 +1,61 @@
+METHOD ONE(25.35% 3ms£©
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> result= new ArrayList<List<Integer>>();
+        if(root==null)return result;
+        List<TreeNode> treeList=new ArrayList<TreeNode>();
+        List<Integer> tmp=new ArrayList<Integer>();
+        TreeNode node;
+        treeList.add(root);
+        int index=0;
+        int end=1;
+        while(index<treeList.size()){
+            node=treeList.get(index++);
+            tmp.add(node.val);
+            if(node.left!=null)treeList.add(node.left);
+            if(node.right!=null)treeList.add(node.right);
+            if(index==end){
+                result.add(0,tmp);
+                tmp=new ArrayList<Integer>();
+                end=treeList.size();
+            }
+        }
+        return result;
+    }
+}
+------------------------------------------------------------------
+METHOD TWO(73.26%£¬2ms,T2£©
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> result= new ArrayList<List<Integer>>();
+        visit(result,root,0);
+        return result;
+    }
+    public void visit(List<List<Integer>> result,TreeNode root,int depth){
+        if(root==null)return;
+        if(depth==result.size()){
+            result.add(0,new ArrayList<Integer>());
+        }
+        result.get(result.size()-depth-1).add(root.val);
+        visit(result,root.left,depth+1);
+        visit(result,root.right,depth+1);
+    }
+}
