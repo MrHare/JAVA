@@ -1,0 +1,27 @@
+METHOD ONE(14.80% 2ms T2)
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int result=0;
+        while(n!=0){
+            result+=n&1;
+            n=n>>>1;
+        }
+        return result;
+    }
+}
+----------------------------------------
+METHOD TWO(14.80% 2ms T2)
+idea: turn the most left 1 to 0,count the times of turn operation,excellent!!!
+
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int result=0;
+        while(n!=0){
+            n=n&(n-1);
+            result++;
+        }
+        return result;
+    }
+}

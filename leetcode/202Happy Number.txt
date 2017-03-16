@@ -1,0 +1,45 @@
+METHOD ONE(60.45% 4ms)
+public class Solution {
+    public boolean isHappy(int n) {
+        HashSet<Integer> set=new HashSet<Integer>();
+        int next=0;
+        while(set.add(n)){
+            if(n==1)return true;
+            int tmp=0;
+            next=0;
+            while(n>0){
+                tmp=n%10;
+                next+=tmp*tmp;
+                n/=10;
+            }
+            n=next;
+        }
+        return false;
+        
+    }
+}
+-------------------------------------------------------------
+METHOD ONE(78.82% 3ms)
+idea:the fast will catch up the slow in a cricle or stay in 1(be catched up by slow)
+
+public class Solution {
+    int foo(int n){
+        int result=0;
+        while(n>0){
+            int tmp=n%10;
+            result+=tmp*tmp;
+            n/=10;
+        }
+        return result;
+    }
+    public boolean isHappy(int n) {
+        int fast=n;
+        int slow=n;
+        do{
+            slow=foo(slow);
+            fast=foo(foo(fast));
+        }while(fast!=slow);
+        if(fast==1)return true;
+        return false;
+    }
+}

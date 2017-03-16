@@ -1,0 +1,27 @@
+METHOD ONE(74.02% 11ms£©
+public class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int length=s.length();
+        if(length!=t.length())return false;
+        for(int i=0;i<length;i++){
+            if(s.indexOf(s.charAt(i))!=t.indexOf(t.charAt(i)))return false;
+        }
+        return true;
+    }
+}
+--------------------------------------------------------
+METHOD ONE(74.02% 11ms£©
+same idea as method one
+
+public class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int[] as=new int[256];
+        int[] ts=new int[256];
+        for(int i=0;i<s.length();i++){
+            if(as[s.charAt(i)]!=ts[t.charAt(i)])return false;
+            //as[s.charAt(i)]=ts[t.charAt(i)]=i;               //WRONG£¬initial value is 0,aa,ab will return true!!!!
+            as[s.charAt(i)]=ts[t.charAt(i)]=i+1;                 ///////////////!!!!!!
+        }
+        return true;
+    }
+}

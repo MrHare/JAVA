@@ -1,0 +1,36 @@
+time limit exceeded(simple 499979)
+public class Solution {
+    static List<Integer> pArray=new ArrayList<Integer>(Arrays.asList(2,3,5,7,11));
+    public int countPrimes(int n) {
+    	if(n>pArray.get(pArray.size()-1)){
+    		for(int i=pArray.get(pArray.size()-1)+1;i<n;i++){
+    			int j=0;
+    			for(;j<pArray.size();j++){
+    				if(i%pArray.get(j)==0)break;
+    			}
+    			if(j==pArray.size())pArray.add(i);
+    		}
+    		return pArray.size();
+    	}else{
+    		int begin=0;
+    		int end=pArray.size()-1;
+    		int mid=0;
+    		while(begin<=end){
+    			mid=(begin+end)/2;
+    			if(pArray.get(mid)==n){
+    				return mid;
+    			}
+    			if(pArray.get(mid)<n){
+    				begin=mid+1;
+    			}else{
+    				end=mid-1;
+    			}
+    		}
+    		int i=mid>=1?mid-1:0;
+    		for(;;i++){
+    			if(pArray.get(i)>n)break;
+    		}
+    		return i;
+    	}
+    }
+}
