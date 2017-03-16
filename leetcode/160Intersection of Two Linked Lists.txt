@@ -51,6 +51,7 @@ public class Solution {
 }
 ------------------------------------------------
 METHOD TWO(43.95% 2ms)
+    excellent ,eminent solution!!!
 
 /**
  * Definition for singly-linked list.
