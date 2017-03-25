@@ -1,5 +1,7 @@
 /*
 METHOD ONE(21.81.% 1ms)
+tips
+node.left==null&&node.right==null is dealed in next recursion
 */
 /**
  * Definition for a binary tree node.
