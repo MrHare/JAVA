@@ -60,3 +60,36 @@ public class Solution {
         }
     }
 }
+/*
+//-------------------------------------------------------------------
+//METHOD 3(29.74% 1 ms T1)
+TIPS
+recode the most left node of each level(TagNode)
+travel the each level(travelNode),manipulate the the next level of the travelNode
+*/
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ *     int val;
+ *     TreeLinkNode left, right, next;
+ *     TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        if(root==null)return;
+        TreeLinkNode tagNode=root;
+        TreeLinkNode travelNode;
+        while(tagNode.left!=null){
+            travelNode=tagNode;
+            while(travelNode!=null){
+                travelNode.left.next=travelNode.right;
+                if(travelNode.next!=null){
+                    travelNode.right.next=travelNode.next.left;
+                }
+                travelNode=travelNode.next;
+            }
+            tagNode=tagNode.left;
+        }
+    }
+}
