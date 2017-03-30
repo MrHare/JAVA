@@ -11,3 +11,13 @@ public class Solution {
    		return i-1;
     }
 }
+/*
+----------------------------------------------------------------
+METHOD TWO(74.63% 5ms t2)
+*/
+public class Solution{
+	public int lengthOfLastWord(String s){
+		s=s.trim();
+		return s.length()-s.lastIndexOf(' ')-1;
+	}
+}
