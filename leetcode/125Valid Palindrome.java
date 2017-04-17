@@ -1,6 +1,9 @@
+/*
+METHOD ONE(94.65% 6ms)
+*/
 public class Solution {
     public boolean isPalindrome(String s) {
-        s.trim();
+        s=s.trim();
         int length=s.length();
         if(length==0)return true;
         int start=-1;
@@ -9,7 +12,7 @@ public class Solution {
         char eChar='0';
         boolean sValid=false;
         boolean eValid=false;
-        while(start<=end){
+        while(start<end){
             if(!sValid){
                 start++;
                 sChar=s.charAt(start);
@@ -21,11 +24,9 @@ public class Solution {
                 eValid=isValid(eChar);
             }
             if(sValid&&eValid){
-                if(sChar!=eChar){
+                if(sChar!=eChar&&Character.toLowerCase(sChar)!=Character.toLowerCase(eChar)){
                     return false;
                 }else{
-                    start++;
-                    end--;
                     sValid=false;
                     eValid=false;
                 }
@@ -34,6 +35,6 @@ public class Solution {
         return true;
     }
     public boolean isValid(char ch){
-        return ch>='a'&&ch<='z'||ch>='A'&&ch<='Z';
+        return ch>='a'&&ch<='z'||ch>='A'&&ch<='Z'||ch>='0'&&ch<='9';
     }
 }
