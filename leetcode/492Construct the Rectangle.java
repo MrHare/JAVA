@@ -10,7 +10,6 @@ public class Solution {
         }
         result[1]=w;
         result[0]=area/w;
-        return result;
-        
+        return result;    
     }
 }
