@@ -33,3 +33,29 @@ public class Solution {
         return ret.toString();
     }
 }
+/////////////////////////////////////////////////
+/*
+METHOD TWO(28.01% 27ms)
+*/
+public class Solution {
+    public String reverseWords(String s) {
+        int ins=0,ine=0;
+        StringBuilder ret=new StringBuilder();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)!=' '){
+                ins=i;
+                ine=s.length();
+                for(int j=i+1;j<s.length();j++){
+                    if(s.charAt(j)==' '){
+                        ine=j;
+                        break;
+                    }
+                }
+                ret.insert(0,s.substring(ins,ine)).insert(0," ");
+                i=ine;
+            }
+        }
+        if(ret.length()>0)ret.deleteCharAt(0);
+        return ret.toString();
+    }
+}
