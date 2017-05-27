@@ -17,7 +17,6 @@ public class Solution {
         }
         tmp=1<<index;*/         //could change as tmp&=-tmp;
         tmp&=-tmp;             //!!!
-
         for(int n:nums){
             if((n&tmp)==0){
                 ret[0]^=n;
